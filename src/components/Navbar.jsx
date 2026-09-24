@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import Avatar from "./Avatar";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -15,8 +16,12 @@ export default function Navbar() {
         </NavLink>
         {user ? (
           <>
+            <NavLink to="/my-blogs">My blogs</NavLink>
             <NavLink to="/new">Write</NavLink>
-            <span className="nav-user">{user.username}</span>
+            <NavLink to="/profile" className="nav-profile">
+              <Avatar src={user.avatar_url} name={user.username} size={28} />
+              <span>{user.username}</span>
+            </NavLink>
             <button type="button" className="btn btn-ghost" onClick={logout}>
               Log out
             </button>

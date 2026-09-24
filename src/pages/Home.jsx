@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
 import { useAuth } from "../AuthContext";
+import Avatar from "../components/Avatar";
+
+function excerpt(html) {
+  const text = (html || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  return text.length > 160 ? `${text.slice(0, 160)}…` : text;
+}
 
 export default function Home() {
   const { user } = useAuth();
@@ -46,18 +52,29 @@ export default function Home() {
         <ul className="post-list">
           {blogs.map((blog) => (
             <li key={blog.id}>
-              <Link to={`/posts/${blog.id}`} className="post-link">
-                <h3>{blog.title}</h3>
-                <p className="post-excerpt">
-                  {blog.content.length > 160
-                    ? `${blog.content.slice(0, 160)}…`
-                    : blog.content}
-                </p>
-                <p className="post-meta">
-                  by {blog.author_username} ·{" "}
-                  {new Date(blog.created_at).toLocaleDateString()}
-                </p>
-              </Link>
+              <article className="post-link">
+                <Link to={`/posts/${blog.id}`}>
+                  <h3>{blog.title}</h3>
+                  <p className="post-excerpt">{excerpt(blog.content)}</p>
+                </Link>
+                <div className="post-meta-row">
+                  <Link
+                    to={`/users/${blog.author_username}`}
+                    className="author-link"
+                  >
+                    <Avatar
+                      src={blog.author_avatar_url}
+                      name={blog.author_username}
+                      size={28}
+                    />
+                    <span>{blog.author_username}</span>
+                  </Link>
+                  <span className="post-meta">
+                    {new Date(blog.created_at).toLocaleDateString()} ·{" "}
+                    {blog.like_count || 0} likes · {blog.comment_count || 0} comments
+                  </span>
+                </div>
+              </article>
             </li>
           ))}
         </ul>
