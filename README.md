@@ -2,17 +2,26 @@
 
 React + Vite SPA for Ink & Co.
 
-## Docs
+## Documentation
 
-See [docs/TECHNICAL_DOCUMENTATION.md](docs/TECHNICAL_DOCUMENTATION.md) for architecture, API contracts, and usage.
+All docs live in **[`docs/`](docs/)**:
 
-## Setup
+| Doc | Description |
+|-----|-------------|
+| [docs/README.md](docs/README.md) | Docs index |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | SPA architecture |
+| [docs/USAGE.md](docs/USAGE.md) | Setup & usage |
+| [docs/TECHNICAL_DOCUMENTATION.md](docs/TECHNICAL_DOCUMENTATION.md) | Full system documentation |
+
+Backend: https://github.com/vivek-modi-bot/blog-backend
+
+## Quick start
 
 ```bash
 npm install
 npm run dev
 ```
 
-App: http://localhost:5173
+App: http://localhost:5173  
 
 Optional: `VITE_API_URL=http://localhost:8000`
